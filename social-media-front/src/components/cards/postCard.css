@@ -1,0 +1,42 @@
+.post-card {
+    height: 250px;
+    margin: 15px;
+}
+
+.post-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.post-card .post-infos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    border-radius: 0 0 15px 15px;
+    padding: 0 10px;
+    position: relative;
+    bottom: 56px;
+    background-color: #1d1c1c;
+}
+
+.post-card .post-infos .user {
+    display: flex;
+    align-items: center;
+}
+
+.post-card .post-infos .user img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.post-card .post-infos .post-reaction .post-button {
+    background-color: #292828;
+    border: none;
+    color: #fff;
+    margin-left: 10px;
+}

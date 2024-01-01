@@ -1,0 +1,26 @@
+.network-user {
+    width: 50%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    color: #fff;
+    margin: 10px 0;
+}
+
+.network-user img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.network-user .connect-button {
+    background: transparent;
+    border: 2px solid #1d1c1c;
+    color: #fff;
+}
+
+.network-user .connect-button:hover {
+    background-color: #1d1c1c;
+}
