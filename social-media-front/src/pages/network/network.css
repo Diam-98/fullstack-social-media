@@ -1,0 +1,39 @@
+.network {
+    color: #fff;
+    width: 100%;
+}
+
+.network .user-list {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 10px;
+}
+
+@media screen and (max-width: 1179px) {
+    .network .user-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (max-width: 996px) {
+    .network .user-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 810px) {
+    .network .user-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 427px) {
+    .network .user-list {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
