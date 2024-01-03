@@ -65,4 +65,23 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function posts(){
+        return $this->hasMany(Post::class, 'user_id', 'id');
+    }
+
+    public function likes(){
+        return $this->hasMany(LikePost::class, 'user_id', 'id');
+    }
+
+    public function connections()
+    {
+        return $this->belongsToMany(User::class, 'user_connections', 'sender_id', 'receiver_id')
+            ->orWhere(function ($query) {
+                $query->where('receiver_id', $this->id)
+                    ->where('sender_id', '!=', $this->id);
+            })
+            ->where('status', 'accepted');
+    }
+
 }
