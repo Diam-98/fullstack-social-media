@@ -23,7 +23,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:api')->get('/user', [AuthController::class, 'loggedUser']);
 Route::middleware('auth:api')->post('/logout', [AuthController::class, 'logout']);
 
-Route::middleware('auth:api')->apiResource('/post', PostController::class);
+Route::apiResource('/post', PostController::class)->middleware('auth:api');
 
 Route::middleware('auth:api')->post('/post/like/{postId}', [LikePostController::class, 'updateLike']);
 Route::middleware('auth:api')->get('/post-likes', [LikePostController::class, 'likedPosts']);
