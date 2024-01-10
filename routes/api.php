@@ -28,6 +28,7 @@ Route::apiResource('/post', PostController::class)->middleware('auth:api');
 Route::middleware('auth:api')->post('/post/like/{postId}', [LikePostController::class, 'updateLike']);
 Route::middleware('auth:api')->get('/post-likes', [LikePostController::class, 'likedPosts']);
 
+Route::middleware('auth:api')->get('/network/all', [UserConnectionController::class, 'getAllUsers']);
 Route::middleware('auth:api')->post('/connect/add/{id}', [UserConnectionController::class, 'addConnection']);
 Route::middleware('auth:api')->post('/connect/accept/{demande}', [UserConnectionController::class, 'acceptConnection']);
 Route::middleware('auth:api')->post('/connect/decline/{demande}', [UserConnectionController::class, 'declineConnection']);
@@ -35,4 +36,5 @@ Route::middleware('auth:api')->get('/network', [UserConnectionController::class,
 Route::middleware('auth:api')->get('/network/pending', [UserConnectionController::class, 'pendingDemands']);
 
 Route::middleware('auth:api')->put('/user/profile', [UserController::class, 'profile']);
+Route::middleware('auth:api')->get('/my-posts', [UserController::class, 'posts']);
 

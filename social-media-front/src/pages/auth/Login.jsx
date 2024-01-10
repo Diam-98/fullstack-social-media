@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { AuthAPI } from "../../api/AuthAPI";
+import { UserAPI } from "../../api/UserAPI";
 import { Alert, Button } from "antd";
 import { useAuth } from "../../context/AuthProvider";
 
@@ -44,7 +44,7 @@ const Login = () => {
     };
 
     const finishSubmit = () => {
-        AuthAPI.login(inputFields)
+        UserAPI.login(inputFields)
             .then((response) => {
                 setUser(response.data.data.user);
                 setToken(response.data.data.token);

@@ -16,11 +16,9 @@ class LikePostController extends Controller
     public function likedPosts()
     {
         
-        $currentUser = Auth::user();
+        $favPosts = Auth::user()->favoritPosts;
 
-        $likedPosts = $currentUser->likes()->with('posts')->get();
-
-        return PostResource::collection($likedPosts);
+        return PostResource::collection($favPosts);
     }
 
     /**

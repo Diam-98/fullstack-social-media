@@ -66,22 +66,55 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function posts(){
+    public function myPosts(){
         return $this->hasMany(Post::class, 'user_id', 'id');
     }
 
     public function likes(){
         return $this->hasMany(LikePost::class, 'user_id', 'id');
     }
-
+    
     public function connections()
     {
-        return $this->belongsToMany(User::class, 'user_connections', 'sender_id', 'receiver_id')
-            ->orWhere(function ($query) {
-                $query->where('receiver_id', $this->id)
-                    ->where('sender_id', '!=', $this->id);
-            })
-            ->where('status', 'accepted');
+        return User::where('id', '!=', $this->id)
+                    ->where(function ($query) {
+                        $query->whereIn('id', function ($subquery) {
+                            $subquery->select('sender_id')
+                                     ->from('user_connections')
+                                     ->where('receiver_id', $this->id)
+                                     ->where('status', 'accepted');
+                        })
+                        ->orWhereIn('id', function ($subquery) {
+                            $subquery->select('receiver_id')
+                                     ->from('user_connections')
+                                     ->where('sender_id', $this->id)
+                                     ->where('status', 'accepted');
+                        });
+                    })
+                    ->get();
     }
+
+    public function others(){
+        return User::where('id', '!=', $this->id)
+                    ->where(function ($query) {
+                        $query->whereNotIn('id', function ($subquery) {
+                            $subquery->select('sender_id')
+                                     ->from('user_connections')
+                                     ->where('receiver_id', $this->id);
+                        })
+                        ->whereNotIn('id', function ($subquery) {
+                            $subquery->select('receiver_id')
+                                     ->from('user_connections')
+                                     ->where('sender_id', $this->id);
+                        });
+                    })
+                    ->get();
+    }
+
+    public function favoritPosts(){
+        return $this->belongsToMany(Post::class, 'like_posts', 'user_id', 'post_id');
+    }
+
+
 
 }

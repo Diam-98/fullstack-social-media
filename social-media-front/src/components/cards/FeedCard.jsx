@@ -4,14 +4,24 @@ import { EditOutlined, HeartOutlined } from "@ant-design/icons";
 import game from "../../assets/images/jeux-video.jpg";
 import { Button } from "antd";
 
-const FeedCard = () => {
+const FeedCard = ({ post }) => {
+    console.log(post?.image);
     return (
         <div className="feed-card">
             <div className="card-top">
                 <div className="left-side">
-                    <img src={userProfile} alt="user profile" />
+                    <img
+                        src={
+                            post?.author?.image
+                                ? post?.author?.image
+                                : userProfile
+                        }
+                        alt="user profile"
+                    />
                     <div className="author-info">
-                        <h3>Diam Diallo</h3>
+                        <h3>
+                            {post?.author?.firstName} {post?.author?.lastName}
+                        </h3>
                         <p>Il y'a 30 minutes</p>
                     </div>
                 </div>
@@ -23,14 +33,9 @@ const FeedCard = () => {
             </div>
             <div className="card-body">
                 <div className="post-text">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Doloremque architecto molestiae similique provident ab
-                        accusamus magni sequi quo ipsum illum ex unde aliquam
-                        quasi debitis nihil, nulla explicabo distinctio id.
-                    </p>
+                    <p>{post?.descriptiton}</p>
                 </div>
-                <img src={game} alt="post image" />
+                <img src={post?.image} alt="post image" />
             </div>
             <div className="card-bottom">
                 <Button className="post-button" icon={<HeartOutlined />}>

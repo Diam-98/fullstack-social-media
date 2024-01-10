@@ -3,10 +3,31 @@ import SearchBox from "../../components/search/SearchBox";
 import { CaretDownFilled, CaretUpFilled } from "@ant-design/icons";
 import "./explore.css";
 import PostCard from "../../components/cards/PostCard";
+import { PostAPI } from "../../api/PostAPI";
+import { useEffect, useState } from "react";
 
 const { Option } = Select;
 
 const Explore = () => {
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const getPosts = () => {
+        PostAPI.getAllPost()
+            .then((response) => {
+                setPosts(response.data.data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.log(err.message);
+                setLoading(false);
+            });
+    };
+
+    useEffect(() => {
+        getPosts();
+    }, []);
+
     const handleChange = (value) => {
         console.log(`Option selectione : ${value}`);
     };
@@ -27,12 +48,9 @@ const Explore = () => {
                 </Select>
             </div>
             <div className="post-list">
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
+                {posts.map((post) => (
+                    <PostCard key={post.id} post={post} />
+                ))}
             </div>
         </div>
     );

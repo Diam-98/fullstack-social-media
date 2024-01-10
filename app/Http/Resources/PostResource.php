@@ -18,7 +18,7 @@ class PostResource extends JsonResource
         return [
             'id' => $this->id,
             'descriptiton' => $this->description,
-            'image' => $this->image ? URL::to($this->image) : null,
+            'image' => $this->image ? URL::to('storage/'.$this->image) : null,
             'author' => $this->author,
         ];
     }

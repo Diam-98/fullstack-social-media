@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use App\Models\UserConnection;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,12 @@ class UserConnectionController extends Controller
 {
 
     use ApiResponseTrait;
+
+    public function getAllUsers(){
+        $users = Auth::user()->others();
+
+        return UserResource::collection($users);
+    }
 
     public function addConnection(int $id){
 
@@ -49,7 +56,7 @@ class UserConnectionController extends Controller
     }
 
     public function connections(){
-        $connections = Auth::user()->connections;
+        $connections = Auth::user()->connections();
         
         return UserResource::collection($connections);
     }

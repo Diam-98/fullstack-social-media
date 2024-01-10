@@ -24,7 +24,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'firstName' => ['string', 'required', 'max:255'],
             'lastName' => ['string', 'required', 'max:255'],
-            'image' => ['image', 'nullable'],
+            'image' => ['nullable'],
             'bio' => ['string', 'nullable'],
             'email' => ['email', 'required'],
         ];

@@ -3,16 +3,21 @@ import userProfile from "../../assets/images/robot-avatar.png";
 import { Button } from "antd";
 import "./userCard.css";
 
-const UserCard = () => {
+const UserCard = ({ user }) => {
     return (
         <div className="network-user">
             <Link to="/">
-                <img src={userProfile} alt="Profile user" />
+                <img
+                    src={user?.image ? user?.image : userProfile}
+                    alt={user?.firstName}
+                />
             </Link>
             <Link to="/" className="link">
-                <span>John Doe</span>
+                <span>
+                    {user?.firstName} {user?.lastName}
+                </span>
             </Link>
-            <p>@john</p>
+            <p>@{user?.firstName}</p>
             <Button className="connect-button">Ajouter</Button>
         </div>
     );
